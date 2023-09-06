@@ -2,6 +2,8 @@
 name = "faex"
 version = "0.1.0"
 edition = "2021"
+authors =["Jorge Hermo"]
+description= "A fast and efficient Compact Data Structures Library"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
