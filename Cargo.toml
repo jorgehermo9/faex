@@ -1,6 +1,6 @@
 [package]
 name = "faex"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors =["Jorge Hermo"]
 description= "A fast and efficient Compact Data Structures Library"
