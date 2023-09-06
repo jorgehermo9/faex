@@ -1,8 +1,8 @@
 use std::fmt::{Debug, Formatter};
 
-use crate::{bit_vectors::BitVec, profiling::HeapSize, util::BitsRequired};
+use crate::{bit_vectors::BitVec, profiling::HeapSize};
 
-use super::CompactIntVec;
+
 // TODO: implement clone for this struct
 pub struct VariableSizeIntVec<'a> {
     raw_data: BitVec,
