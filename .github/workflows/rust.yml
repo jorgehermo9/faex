@@ -2,34 +2,29 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  rustfmt:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - run: rustup update stable && rustup default stable
-    - run: rustup component add rustfmt
-    - run: cargo fmt --all --check
-  clippy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: rustup update stable && rustup default stable
-      - run: rustup component add clippy
-      - run: cargo clippy --lib --no-deps -- -D warnings
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v3
+      - name: Update stable and set as default
+        run: rustup update stable && rustup default stable
+      - name: Install clippy
+        run: rustup component add clippy
+      - name: Install rustfmt
+        run: rustup component add rustfmt
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Check clippy
+        run: cargo clippy --lib --no-deps -- -D warnings
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test --verbose
