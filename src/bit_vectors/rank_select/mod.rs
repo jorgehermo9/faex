@@ -28,12 +28,12 @@ pub trait Select {
 pub trait RankSupport<T> {
     /// Returns the number of 1s in the bit vector in the range [0, index).
     /// # Safety
-    /// The data passed must be the same data that the structure was built with.
+    /// The data used must be the same data that the structure was built with.
     unsafe fn rank(&self, data: &T, index: usize) -> Option<usize>;
 
     /// Returns the number of 0s in the bit vector in the range [0, index).
     /// # Safety
-    /// The data passed must be the same data that the structure was built with.
+    /// The data used must be the same data that the structure was built with.
     unsafe fn rank0(&self, data: &T, index: usize) -> Option<usize> {
         self.rank(data, index).map(|rank| index - rank)
     }
@@ -43,12 +43,12 @@ pub trait SelectSupport<T> {
     /// Return the index of the i-th 1 in the bit vector.
     /// select(0) == 0
     /// # Safety
-    /// The data passed must be the same data that the structure was built with.
+    /// The data used must be the same data that the structure was built with.
     unsafe fn select(&self, data: &T, rank: usize) -> Option<usize>;
 
     /// Return the index of the i-th 0 in the bit vector.
     /// # Safety
-    /// The data passed must be the same data that the structure was built with.
+    /// The data used must be the same data that the structure was built with.
     unsafe fn select0(&self, data: &T, rank0: usize) -> Option<usize>;
 }
 
@@ -65,6 +65,8 @@ impl<T, R> RankStructure<T, R>
 where
     R: RankSupport<T>,
 {
+    /// # Safety
+    /// The data used must be the same data that the structure was built with.
     pub unsafe fn new(data: T, rank_support: R) -> Self {
         Self { data, rank_support }
     }
@@ -134,6 +136,8 @@ impl<T, S> SelectStructure<T, S>
 where
     S: SelectSupport<T>,
 {
+    /// # Safety
+    /// The data used must be the same data that the structure was built with.
     pub unsafe fn new(data: T, select_support: S) -> Self {
         Self {
             data,
@@ -208,6 +212,8 @@ where
     R: RankSupport<T>,
     S: SelectSupport<T>,
 {
+    /// # Safety
+    /// The data used must be the same data that the structure was built with.
     pub unsafe fn new(data: T, rank_support: R, select_support: S) -> Self {
         Self {
             data,
