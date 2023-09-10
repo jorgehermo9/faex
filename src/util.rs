@@ -16,7 +16,6 @@ macro_rules! bitmask {
 }
 
 /// Extract $len bits from $val at bit offset $off. Only valid for usize values.
-#[macro_export]
 macro_rules! getbits {
     ( $val: expr, $len:expr, $off:expr ) => {
         ($val & $crate::util::bitmask!($len, $off)) >> $off
@@ -24,7 +23,6 @@ macro_rules! getbits {
 }
 
 /// Update $len bits in $var at bit offset $off to $val. Only valid for usize values.
-#[macro_export]
 macro_rules! setbits {
     ( $var: expr, $len:expr, $off:expr, $val: expr ) => {
         $var = ($var & !$crate::util::bitmask!($len, $off))
