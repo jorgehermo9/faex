@@ -33,7 +33,7 @@ fn push() {
     assert_eq!(int_vec.len(), 5);
     assert_eq!(int_vec.raw_data().len(), 10);
     assert_eq!(int_vec.samples[0], 0);
-    assert_eq!(int_vec.samples[0], 6);
+    assert_eq!(int_vec.samples[1], 6);
 
     assert_eq!(int_vec.get(0), 0);
     assert_eq!(int_vec.get(1), 1);
